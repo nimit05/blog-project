@@ -1,6 +1,5 @@
 const {Router} = require('express')
 const route = Router()
-const {findUserByToken} = require('../../controllers/users')
 const {authwire} = require('../../middlewires/auth')
 const {Users} = require('../../data/db')
 
