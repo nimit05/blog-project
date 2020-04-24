@@ -25,7 +25,21 @@ route.post('/:username/follow' , async(req,res) => {
     profile.following = true
     profile.save().then(function () {})
 
-    return profile
+    return res.send({profile})
+
+})
+
+route.delete('/:username/follow' , async(req,res) => {
+    const profile = await Users.findOne({
+        attributes : ['username' , 'bio' ,'image' , 'following'],
+        where : {username : req.params.username}
+    })
+
+  profile.following = false
+  profile.save().then(function () {})
+
+  return res.send({profile})
+
 
 })
 
