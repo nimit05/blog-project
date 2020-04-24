@@ -15,7 +15,8 @@ async function createusers (username ,email , password  , bio , image , followin
 
     const user = await Users.findOne({
         attributes : ['username' , 'bio' , 'image' , 'token', 'createdAt'
-    , 'updatedAt' , 'email']
+    , 'updatedAt' , 'email'],
+    where : {token : newuser.token}
     })
 
     return user
