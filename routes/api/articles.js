@@ -157,6 +157,13 @@ return  res.send('deleted')
             as: 'author'
         }]
     })
+
+let arr2 = article.favouriteUsername
+
+if(article.favouriteUsername != null){
+    arr = arr.concat(arr2)
+}
+
 arr.push(req.user.username)
 console.log(article)
 
