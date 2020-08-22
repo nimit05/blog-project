@@ -6,8 +6,8 @@ dotenv.config();
 const db = new Sequelize({
     dialect : 'mysql' ,
     database : 'realworldio',
-    username : process.env.mysql_username,
-    password : process.env.mysql_pass
+    username : 'creator',
+    password : 'letmein'
 })
 
 const Users = db.define('users' , {

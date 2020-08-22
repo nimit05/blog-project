@@ -11,13 +11,7 @@ async function authwire(req , res , next){
             return next()
         }
     } else {
-        res.status(401).send({
-            "errors":{
-              "body": [
-                "Authorization Token empty"
-              ]
-            }
-          })
+        res.status(401).redirect('/api/login')
     }
 }
 module.exports = {authwire}   

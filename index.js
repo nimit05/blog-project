@@ -10,7 +10,7 @@ app.use('/api' , apiroute)
 app.use(exp.urlencoded({extended : true}))
 
 
-db.sync({}).then( () => {
+db.sync().then( () => {
     app.listen(7878 , ()=> {
         console.log('sever started on http//:localhost:7878')
     })
