@@ -71,7 +71,7 @@ route.get('/' , async(req,res) => {
             'favourite' , 'favouritecount' ,
         ],
         include: [{
-            attributes: ['username', 'bio', 'image'],
+            attributes: ['username',],
             model: Users,
             as: 'author'
         }]

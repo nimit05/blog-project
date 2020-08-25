@@ -18,7 +18,6 @@ const Users = db.define('users' , {
     },
     email : {
         type : Sequelize.STRING(100),
-        unique : true,
         allownull : false
     },
     password : {
@@ -28,15 +27,6 @@ const Users = db.define('users' , {
     token :{
         type : Sequelize.STRING(45),
         allownull : false
-    },
-    bio : {
-        type : Sequelize.TEXT
-    },
-    image : {
-     type: Sequelize.STRING
-    },
-    following : {
-        type : Sequelize.BOOLEAN
     }
 }
 

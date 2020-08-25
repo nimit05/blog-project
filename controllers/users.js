@@ -1,41 +1,18 @@
 const {Users , Articles} = require('../data/db')
 const {getrandomstring} = require('../utils/random')
 
-async function createusers (username ,email , password  , bio , image , following) {
-    const newuser = await Users.create({
+async function createusers (username ,email , password) {
+    const user = await Users.create({
         username,
         email,
         password,
         token : getrandomstring(32) , 
-        bio,
-        image,
-        following
-    })
-
-
-    const user = await Users.findOne({
-        attributes : ['username' , 'bio' , 'image' , 'token', 'createdAt'
-    , 'updatedAt' , 'email'],
-    where : {token : newuser.token}
     })
 
     return user
 }
 
-async function authuser(username , password) {
-    const auth = await Users.findOne({
-        where : {username}
-    })
-    if(!auth){
-        return { body: [ 'No user found with that username' ]}
-    }
-    if(auth.password != password){
-        return {body : ['incorrect Password']}
-    }
-    else{
-        return auth
-    }
-}
+
 
 async function findUserByToken(token) {
     const user = await Users.findOne({
@@ -65,5 +42,5 @@ async function findUserByslug(slug) {
 
 }
 
-module.exports = {createusers , authuser , findUserByToken , findUserByslug}
+module.exports = {createusers  , findUserByToken , findUserByslug}
 

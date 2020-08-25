@@ -1,17 +1,24 @@
-const {findUserByToken} = require('../controllers/users')
-
+const {Users} = require('../data/db')
 async function authwire(req , res , next){
-    let auth = req.headers['authorization']
-    if (auth && auth.startsWith('Token ')) {
-        let token = auth.split(' ')[1]
-        let user = await findUserByToken(token)
-        if (user) {
-            req.user = user 
-            
-            return next()
+        let token = null
+        let authUser = null
+        
+        if(req.session){
+            token = req.session.token
         }
-    } else {
-        res.status(401).redirect('/api/login')
+        if(token){
+             authUser = await Users.findOne({
+                where : {
+                    token : token
+                }
+            })
+        }
+        if(authUser){
+            req.user = authUser;
+            next();
+        }else{
+            res.send({error : 'Authorization error'})
+        }
     }
-}
+
 module.exports = {authwire}   
