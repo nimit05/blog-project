@@ -1,13 +1,11 @@
 const {Router} = require('express')
 const route = Router()
-const{Users} = require('../../data/db')
+const{Users , Articles} = require('../../data/db')
+const { authwire } = require('../../middlewires/auth')
 
 route.get('/:username' , async(req,res) => {
     const profile = await Users.findOne({
-        attributes : ['username' , 'bio' ,'image' , 'following'],
         where : {username : req.params.username}
-        
-
     })
 
     
@@ -18,7 +16,6 @@ route.get('/:username' , async(req,res) => {
  
 route.post('/:username/follow' , async(req,res) => {
     const profile = await Users.findOne({
-        attributes : ['username' , 'bio' ,'image' , 'following'],
         where : {username : req.params.username}
     })
 
@@ -31,17 +28,26 @@ route.post('/:username/follow' , async(req,res) => {
 
 route.delete('/:username/follow' , async(req,res) => {
     const profile = await Users.findOne({
-        attributes : ['username' , 'bio' ,'image' , 'following'],
         where : {username : req.params.username}
     })
 
   profile.following = false
-  profile.save().then(function () {})
+  profile.save()
 
   return res.send({profile})
 
 
 })
+
+route.get('/myarticles' , authwire , async(req,res) => {
+    const articles = await Articles.findAll({
+        where : {authorUsername : req.query.username}
+    })
+    console.log(articles)
+
+    res.send(articles)
+})
+
 
 
 module.exports = {route}

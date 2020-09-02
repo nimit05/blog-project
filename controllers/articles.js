@@ -44,7 +44,7 @@ return opi
 }
 
 
-async function createArticle(title , body , description , tagList , authorUsername , favourite , favouritecount ){
+async function createArticle(title , description , body , tagList , authorUsername){
      if (!title) {
         return new Error('title missing')
     }
@@ -58,9 +58,7 @@ async function createArticle(title , body , description , tagList , authorUserna
         description,
         body,
         tagList,
-        authorUsername ,
-        favourite,
-       favouritecount
+        authorUsername
     })
     const article = await Articles.findOne({
         attributes: [
@@ -70,7 +68,7 @@ async function createArticle(title , body , description , tagList , authorUserna
         ],
         where: {slug: newArticle.slug},
         include: [{
-            attributes: ['username', 'bio', 'image'],
+            attributes: ['username'],
             model: Users,
             as: 'author'
         }]

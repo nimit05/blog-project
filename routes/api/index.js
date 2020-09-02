@@ -8,7 +8,7 @@ const userRouter = require('./login').route
 const route = Router()
 
 route.use('/articles' ,articlesRouter )
-route.use('/profiles' , profilesRouter)
+route.use('/profile' , profilesRouter)
 route.use('/signup' , signupRouter)
 route.use('/login' , userRouter)
 

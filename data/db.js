@@ -48,14 +48,7 @@ const Articles = db.define('articles' ,  {
         type: Sequelize.TEXT
     },
    "tagList" : {
-       type : Sequelize.TEXT,
-       get(){
-        return this.getDataValue('tagList')
-    },
-    set(val){
-        this.setDataValue('tagList', val.join(','));
-    },
-
+       type : Sequelize.TEXT
    },
    "favourite" : {
        type : Sequelize.BOOLEAN
@@ -64,15 +57,7 @@ const Articles = db.define('articles' ,  {
        type : Sequelize.INTEGER
    },
    "favouriteUsername" : {
-       type : Sequelize.TEXT,
-    
-       get(){
-           return this.getDataValue('favouriteUsername').split(';')
-       },
-       set(val){
-           this.setDataValue('favouriteUsername', val.join(','));
-       },
-   
+       type : Sequelize.TEXT
    }
 }
 

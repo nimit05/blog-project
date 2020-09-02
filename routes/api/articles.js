@@ -15,18 +15,17 @@ route.get('/:slug/comments'  , async(req,res) => {
    })
 
 route.post('/' , authwire ,  async (req,res) => {
-    let a = req.body.article
+    let a = req.body
     const article = await createArticle(
         a.title,
-        a.body,
         a.description,
+        a.body,
         a.tagList,
-        req.user.username,
-        false,
-        "0" 
+        req.user.username
     )
+    console.log(article)
 
-    return res.send(article)
+     res.send(article)
 })
 
 route.post('/:slug/comments' , authwire , async (req,res) => {
@@ -69,6 +68,7 @@ route.get('/' , async(req,res) => {
             'slug', 'title', 'description',
             'body', 'createdAt', 'updatedAt',
             'favourite' , 'favouritecount' ,
+            'tagList'
         ],
         include: [{
             attributes: ['username',],
@@ -76,10 +76,7 @@ route.get('/' , async(req,res) => {
             as: 'author'
         }]
     })
-    return res.send({
-        article ,
-       articlecount : article.length
-    })
+     res.send(article)
 })
 
   route.put('/:slug' , async (req , res) => {

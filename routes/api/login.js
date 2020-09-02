@@ -63,4 +63,12 @@ route.delete('/'  , authwire ,  async (req,res) => {
 
 })
 
+route.get('/session' , authwire , async(req,res) => {
+  if(req.session.token){
+    res.send({token : req.session.token})
+  }else{
+    res.send({error : 'error occured'})
+  }
+})
+
 module.exports = { route }
